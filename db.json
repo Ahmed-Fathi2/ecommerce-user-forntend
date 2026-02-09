@@ -81,6 +81,41 @@
       "email": "test159@gamil.com",
       "password": "1234556",
       "confirmPassword": "1234556"
+    },
+    {
+      "id": "dfb0",
+      "fullName": "ahmed",
+      "email": "ahmed1234@test.com",
+      "password": "123456",
+      "confirmPassword": "123456"
+    },
+    {
+      "id": "7443",
+      "fullName": "fathi",
+      "email": "fathi123@test.com",
+      "password": "147258",
+      "confirmPassword": "147258"
+    },
+    {
+      "id": "809d",
+      "fullName": "ahmed",
+      "email": "ahmed89@test.com",
+      "password": "ahmed123",
+      "confirmPassword": "ahmed123"
+    },
+    {
+      "id": "8293",
+      "fullName": "ahmed",
+      "email": "jd@test.com",
+      "password": "123456",
+      "confirmPassword": "123456"
+    },
+    {
+      "id": "b585",
+      "fullName": "dsdc",
+      "email": "dsc@test.com",
+      "password": "147258",
+      "confirmPassword": "147258"
     }
   ]
 }

@@ -1,1 +1,109 @@
-<p>login works!</p>
+<!-- <div class="w-full max-w-3xl mx-auto relative flex items-center justify-center h-full scrollbar-hide"> -->
+  <!-- <div class="w-full max-w-5xl mx-auto relative flex items-center justify-center h-full scrollbar-hide"> -->
+    <div class="w-full  relative flex items-center justify-center h-full scrollbar-hide" >
+  <div class="bg-white shadow-[0_4px_20px_-5px_rgba(0,0,0,0.1)] rounded-2xl p-8 w-full border border-slate-100 px-6" >
+    <div class="mb-6 text-center">
+      <h1 class="text-3xl font-extrabold text-slate-800 border-b-2 border-slate-200 p-2">Sign in</h1>
+    </div>
+<!-- && loginForm.get("email")?.errors===null &&loginForm.get("password")?.errors===null -->
+    @if(errormsg()  ){
+    <div
+      class="mb-4 p-3 border-l-4 border-red-500 bg-red-50 rounded-xl text-red-700 font-semibold shadow-md flex items-center space-x-3">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500 flex-shrink-0" fill="none" viewBox="0 0 24 24"
+        stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M12 9v2m0 4h.01M12 3C7.589 3 4 6.589 4 11c0 4.411 3.589 8 8 8s8-3.589 8-8c0-4.411-3.589-8-8-8z" />
+      </svg>
+      <p class="text-sm sm:text-base">
+        {{ errormsg() }}
+      </p>
+    </div>
+    }
+
+    <form [formGroup]="loginForm" (ngSubmit)="Submit()" class="space-y-4">
+      <!-- Grid Container for Inputs (Horizontal plane like Register) -->
+      <div class="grid grid-cols-1 md:grid-cols-1 gap-5">
+        <!-- Email Section -->
+        <div>
+          <label class="text-sm text-slate-700 font-bold block mb-1">Email Address</label>
+          <div class="relative flex items-center">
+            <input formControlName="email" name="email" type="email" required
+              class="w-full text-sm text-slate-800 border-b-2 border-slate-200 focus:border-blue-600 px-3 py-2.5 outline-none transition-colors font-medium bg-slate-50/50 focus:bg-white"
+              placeholder="name@example.com" />
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-[18px] h-[18px] absolute right-3 text-slate-400"
+              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+          </div>
+          @if(loginForm.get("email")?.errors?.["required"] && loginForm.get("email")?.touched){
+          <p style="color: rgb(236, 42, 42); font-size: 14px; margin-top: 2px;">Email is required</p>
+
+          }
+          @else if(loginForm.get("email")?.errors?.["email"] && loginForm.get("email")?.touched){
+          <p style="color: rgb(236, 42, 42); margin-top: 2px; font-size: 14px;">Invalid email format</p>
+          }
+        </div>
+
+        <!-- Password Section -->
+        <div>
+          <label class="text-sm text-slate-700 font-bold block mb-1">Password</label>
+          <div class="relative flex items-center">
+            <input formControlName="password" name="password" type="password" #passInput
+              class="w-full text-sm text-slate-800 border-b-2 border-slate-200 focus:border-blue-600 px-3 py-2.5 outline-none transition-colors font-medium bg-slate-50/50 focus:bg-white"
+              placeholder="••••••••" />
+            <button type="button" (click)="passInput.type= passInput.type==='password'? 'text' :'password'"
+              class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 transition-colors cursor-pointer">
+              @if(passInput.type==='password'){
+              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+              }
+              @else {
+              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18" />
+              </svg>
+              }
+            </button>
+          </div>
+          @if(loginForm.get("password")?.errors?.["required"] && loginForm.get("password")?.touched){
+          <p style="color: rgb(236, 42, 42); font-size: 14px; margin-top: 2px;">Password is required</p>
+          }
+        </div>
+      </div>
+
+      <!-- Action Area -->
+      <div class="flex flex-wrap items-center justify-end gap-4 mt-0">
+        <div class="text-sm">
+          <a href="javascript:void(0);" class="text-blue-600 hover:underline font-bold">
+            Forgot password?
+          </a>
+        </div>
+      </div>
+
+      <div class="pt-2 border-t border-slate-100 mt-0">
+        <button type="submit" [disabled]="isLoading()"
+          class="w-full py-3.5 px-4 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl shadow-lg shadow-blue-600/20 transition-all transform hover:scale-[1.01] active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-base hover:cursor-pointer">
+          @if(isLoading()){
+          <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
+            viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+            </path>
+          </svg>
+          Signing in...
+          }
+          @else { Sign in }
+        </button>
+
+        <p class="text-slate-600 text-sm mt-4 text-center">Already have an account? <a routerLink="/register"
+            class="text-blue-600 font-bold hover:underline cursor-pointer ml-1">Register here</a></p>
+      </div>
+    </form>
+  </div>
+</div>
